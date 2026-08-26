@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.env
+.env.*
+venv/
+*.egg-info/
+
+# Data Files (Never upload customer data to GitHub)
+clients.csv
+failed_emails.txt

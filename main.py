@@ -13,13 +13,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # --- Neon PostgreSQL Database Setup ---
-# Yahan apni Neon connection string paste karein (ya environment variable use karein)
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://neondb_owner:npg_yeJtEBU6x2CH@ep-divine-resonance-axlcrodj.c-4.us-east-2.aws.neon.tech/neondb?sslmode=require",
-)
+# 1. DATABASE FIX: Ab koi hardcoded password nahi hai. Sirf environment variable use hoga!
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# PostgreSQL ke liye connect_args ki zaroorat nahi hoti
+if not DATABASE_URL:
+    raise RuntimeError(
+        "DATABASE_URL environment variable is not set. "
+        "Set it in Render's environment settings before starting the app."
+    )
+
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
@@ -43,10 +45,12 @@ Base.metadata.create_all(bind=engine)
 # --- FastAPI App ---
 app = FastAPI()
 
-# Frontend (Next.js) ko connect karne ke liye CORS
+# 2. CORS FIX: Frontend URL ko dynamically allow karna
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[FRONTEND_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
