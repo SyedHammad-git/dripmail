@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+:root {
+  --background: #F3F8FF;
+  --foreground: #0B1F4B;
+
+  /* DripMail design system */
+  --color-dm-primary: #1976F3;
+  --color-dm-header: #90CAF9;
+  --color-dm-tint-light: #EAF4FF;
+  --color-dm-bg: #F3F8FF;
+  --color-dm-navy: #0B1F4B;
+  --color-dm-body: #344B73;
+  --color-dm-border: #D6E4F5;
+  --color-dm-success: #18B77A;
+  --color-dm-error: #FF3B3B;
+  --color-dm-muted: #718096;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-dm-primary: var(--color-dm-primary);
+  --color-dm-header: var(--color-dm-header);
+  --color-dm-tint-light: var(--color-dm-tint-light);
+  --color-dm-bg: var(--color-dm-bg);
+  --color-dm-navy: var(--color-dm-navy);
+  --color-dm-body: var(--color-dm-body);
+  --color-dm-border: var(--color-dm-border);
+  --color-dm-success: var(--color-dm-success);
+  --color-dm-error: var(--color-dm-error);
+  --color-dm-muted: var(--color-dm-muted);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --radius-card: 16px;
+  --radius-field: 10px;
+
+  --shadow-card: 0 1px 2px rgba(11, 31, 75, 0.04), 0 4px 16px rgba(11, 31, 75, 0.06);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
